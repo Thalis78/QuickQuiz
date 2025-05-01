@@ -21,7 +21,7 @@ Este é um sistema de quiz interativo desenvolvido para ser usado em sala de aul
 
 ### **Frontend:**
 
-- **Tecnologias:** HTML, CSS e JavaScript.
+- **Tecnologias:** React com JSX e CSS puro.
 - O frontend será responsável pela criação da interface do usuário, onde o professor poderá criar quizzes e os alunos poderão acessar os quizzes e registrar suas respostas.
 
 ### **Backend (Java Spring Boot):**
@@ -58,9 +58,8 @@ Este é um sistema de quiz interativo desenvolvido para ser usado em sala de aul
 
 ### **Frontend:**
 
-- **HTML:** Estruturação da interface web.
-- **CSS:** Estilização da interface.
-- **JavaScript:** Lógica de interação no frontend, controle de quiz e exibição de pontuação.
+- **React (JSX):** Estruturação e lógica da interface com componentes modernos e reutilizáveis.
+- **CSS Puro:** Estilização da interface sem uso de frameworks externos.
 
 ### **Backend:**
 
@@ -74,6 +73,7 @@ Este é um sistema de quiz interativo desenvolvido para ser usado em sala de aul
 ### **Banco de Dados:**
 
 - **MySQL/PostgreSQL:** Para armazenamento de dados (quizzes, usuários, respostas, pontuação).
+
 
 # Versionamento de código:
 
