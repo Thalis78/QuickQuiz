@@ -1,0 +1,53 @@
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+skinparam actorStyle awesome
+
+actor Professor
+actor Aluno
+
+rectangle "Sistema de Quiz Educacional de Inglês" {
+
+  package "Professor (Admin)" {
+    (Cadastrar-se no Primeiro Acesso) as CadastroProfessor
+    (Fazer Login) as LoginProfessor
+    (Editar Perfil) as EditarProfessor
+    (Recuperar Senha) as RecuperarSenha
+    (Criar Quiz) as CriarQuiz
+    (Gerar Quiz Aleatório) as GerarQuiz
+    (Configurar Quiz) as ConfigurarQuiz
+    (Gerar QR Code do Quiz) as GerarQRCode
+    (Visualizar Resultados dos Alunos) as VerResultados
+    (Visualizar Ranking) as VerRanking
+    (Resetar Dados dos Alunos) as ResetarAlunos
+  }
+
+  package "Aluno (sem cadastro)" {
+    (Acessar Quiz via QR Code) as AcessarQuiz
+    (Criar Nome de Usuário) as CriarUsername
+    (Responder Questões do Quiz) as ResponderQuestoes
+    (Receber Feedback) as FeedbackAluno
+    (Visualizar Ranking) as VerRankingAluno
+  }
+
+  Professor --> CadastroProfessor
+  Professor --> LoginProfessor
+  Professor --> EditarProfessor
+  Professor --> RecuperarSenha
+  Professor --> CriarQuiz
+  CriarQuiz --> GerarQuiz
+  CriarQuiz --> ConfigurarQuiz
+  CriarQuiz --> GerarQRCode
+  Professor --> VerResultados
+  Professor --> VerRanking
+  Professor --> ResetarAlunos
+
+  // Relacionamentos Aluno
+  Aluno --> AcessarQuiz
+  AcessarQuiz --> CriarUsername
+  CriarUsername --> ResponderQuestoes
+  ResponderQuestoes --> FeedbackAluno
+  ResponderQuestoes --> VerRankingAluno
+}
+
+@enduml

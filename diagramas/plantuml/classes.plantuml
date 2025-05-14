@@ -1,0 +1,88 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+class Professor {
+  - id: int
+  - nome: String
+  - email: String
+  - senha: String
+  + editarPerfil()
+  + criarQuiz()
+}
+
+class Aluno {
+  - username: String
+  + responderQuiz()
+}
+
+class Quiz {
+  - id: int
+  - titulo: String
+  - nivel: NivelIngles
+  - tempoPorQuestao: int
+  - dataCriacao: DateTime
+  + gerarQRCode()
+  + calcularResultado()
+}
+
+class QRCode {
+  - codigo: String
+  - url: String
+  + gerar()
+}
+
+class Questao {
+  - id: int
+  - enunciado: String
+  - tempoMaximo: int
+  + calcularPontuacao(tempoResposta: int): int
+}
+
+abstract class QuestaoImagemAlternativas
+abstract class QuestaoTextoAlternativas
+abstract class QuestaoVideoAlternativas
+abstract class QuestaoCompletarFrase
+abstract class QuestaoImagemTexto
+
+Questao <|-- QuestaoImagemAlternativas
+Questao <|-- QuestaoTextoAlternativas
+Questao <|-- QuestaoVideoAlternativas
+Questao <|-- QuestaoCompletarFrase
+Questao <|-- QuestaoImagemTexto
+
+class Resposta {
+  - questao: Questao
+  - alternativaSelecionada: String
+  - tempoResposta: int
+  + calcularPontuacao(): int
+}
+
+class Resultado {
+  - aluno: Aluno
+  - quiz: Quiz
+  - respostas: List<Resposta>
+  - pontuacaoTotal: int
+  + calcularEstatisticas()
+}
+
+class Ranking {
+  - resultados: List<Resultado>
+  + ordenarPorPontuacaoETempo()
+}
+
+Professor "1" -- "0..*" Quiz
+Quiz "1" -- "1..*" Questao
+Quiz "1" -- "1" QRCode
+Aluno "1" -- "1" Resultado
+Resultado "1" -- "1..*" Resposta
+Ranking "1" -- "0..*" Resultado
+
+enum NivelIngles {
+  A1
+  A2
+  B1
+  B2
+  C1
+  C2
+}
+@enduml
