@@ -42,7 +42,6 @@ rectangle "Sistema de Quiz Educacional de Inglês" {
   Professor --> VerRanking
   Professor --> ResetarAlunos
 
-  // Relacionamentos Aluno
   Aluno --> AcessarQuiz
   AcessarQuiz --> CriarUsername
   CriarUsername --> ResponderQuestoes
