@@ -166,7 +166,22 @@ Os commits devem ser nomeados com verbos no tempo **presente do indicativo**, de
 - **Automação e Integração Contínua**: Padrões como o Conventional Commits permitem a automação de tarefas como geração de changelogs ou deploys automáticos.
 - **Melhoria no Colaborativo**: Facilita a colaboração entre membros da equipe, proporcionando uma visão clara sobre o que está sendo feito e em que momento.
 
-## 6. Links para Extensão do Conteúdo
+### 6. Sugestão de Emojis (Opcional)
+
+| Emoji | Tipo        | Descrição                     |
+|-------|-------------|-------------------------------|
+| 🐛    | `fix`       | Correção de bug               |
+| 📚    | `docs`      | Atualização de documentação   |
+| 💄    | `style`     | Estilo/visual (CSS, layout)   |
+| ♻️    | `refactor`  | Refatoração de código         |
+| ✨    | `feat`      | Nova funcionalidade           |
+| 🔧    | `chore`     | Tarefa de configuração        |
+| 🎉    | `init`      | Primeiro commit do projeto    |
+| 🧪    | `test`      | Adição/modificação de testes  |
+
+---
+
+## 7. Links para Extensão do Conteúdo
 
 Para mais informações e recursos sobre padrões de commits, acesse o repositório oficial:
 
