@@ -1,8 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Header } from './Header';
 import { UserTypeCard } from './UserTypeCard';
 
 export const HomePage: React.FC = () => {
+  const navigate = useNavigate();
   const handleContactClick = () => {
     // Could open a contact modal, navigate to contact page, etc.
     alert('Funcionalidade de contato será implementada em breve!');
@@ -14,23 +16,25 @@ export const HomePage: React.FC = () => {
   };
 
   const handleTeacherClick = () => {
-    // Navigate to teacher area or show teacher login
-    alert('Área do professor será implementada em breve!');
+    // Navigate to teacher login
+    navigate('/professor/login');
   };
 
   return (
     <div className="w-full min-h-screen relative bg-[#605BEF]">
       {/* Background Image */}
-      <div className="fixed inset-0 w-full h-full -z-10">
+      <div className="fixed inset-0 w-full h-full z-0">
         <img
-          src="https://api.builder.io/api/v1/image/assets/TEMP/2d180ed5c986b6370485a695cb41abd1e47aae59?width=3024"
+          src="/bg.svg"
           alt="Background pattern"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover opacity-100"
+          onError={(e) => console.error('Erro ao carregar imagem:', e)}
+          onLoad={() => console.log('Imagem carregada com sucesso')}
         />
       </div>
       
       {/* Header */}
-      <Header onContactClick={handleContactClick} />
+      <Header />
       
       {/* Main Content */}
       <main className="relative z-[1] flex flex-col items-center px-4 pb-12">
