@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import { Header } from '@/components/Header';
 import { useAuth } from '@/contexts/AuthContext';
-import { toast } from '@/hooks/use-toast';
+import { toast } from 'sonner';
 
 export const ProfessorLogin: React.FC = () => {
   const navigate = useNavigate();
@@ -21,31 +21,20 @@ export const ProfessorLogin: React.FC = () => {
       const result = await login(email, password);
       
       if (result.success) {
-        toast({
-          title: 'Login realizado!',
-          description: 'Bem-vindo ao English Quizz CIEL CURSOS.',
-        });
+        toast.success('Bem-vindo ao English Quizz CIEL CURSOS!');
         navigate('/professor/dashboard');
       } else {
-        toast({
-          title: 'Erro ao fazer login',
-          description: result.error || 'Credenciais inválidas.',
-          variant: 'destructive',
-        });
+        toast.error(result.error || 'Credenciais inválidas.');
       }
     } catch (error) {
-      toast({
-        title: 'Erro',
-        description: 'Ocorreu um erro ao tentar fazer login.',
-        variant: 'destructive',
-      });
+      toast.error('Ocorreu um erro ao tentar fazer login.');
     } finally {
       setIsLoading(false);
     }
   };
 
   const handleContactClick = () => {
-    alert('Funcionalidade de contato será implementada em breve!');
+    toast.info('Funcionalidade de contato será implementada em breve!');
   };
 
   return (

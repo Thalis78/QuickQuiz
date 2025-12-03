@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'sonner';
 import { Header } from './Header';
 import { UserTypeCard } from './UserTypeCard';
 
@@ -7,16 +8,14 @@ export const HomePage: React.FC = () => {
   const navigate = useNavigate();
   const handleContactClick = () => {
     // Could open a contact modal, navigate to contact page, etc.
-    alert('Funcionalidade de contato será implementada em breve!');
+    toast.info('Funcionalidade de contato será implementada em breve!');
   };
 
   const handleStudentClick = () => {
-    // Navigate to student area or show student login
-    alert('Área do aluno será implementada em breve!');
+    navigate('/aluno/entrar');
   };
 
   const handleTeacherClick = () => {
-    // Navigate to teacher login
     navigate('/professor/login');
   };
 

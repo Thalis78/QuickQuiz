@@ -1,27 +1,28 @@
-// Conta de teste do professor CIEL CURSOS
-// Futuramente pode ser expandida para múltiplas contas
-
+// Interface de professor
 export interface Professor {
   id: string;
   name: string;
   email: string;
-  password: string;
   type: 'professor';
 }
 
-// Credenciais da conta de teste
-const TEST_PROFESSOR: Professor = {
-  id: '1',
-  name: 'Professor CIEL',
-  email: 'professor@ciel.com',
-  password: 'ciel123',
-  type: 'professor'
-};
+const API_URL = 'http://localhost:3001/api';
 
-// Função auxiliar para validar login
-export const validateProfessorLogin = (email: string, password: string): Professor | null => {
-  if (email === TEST_PROFESSOR.email && password === TEST_PROFESSOR.password) {
-    return TEST_PROFESSOR;
+// Validar login com backend (verifica se email está autorizado)
+export const validateProfessorLogin = async (email: string, password: string): Promise<Professor | null> => {
+  try {
+    const response = await fetch(`${API_URL}/auth/validate`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!response.ok) return null;
+
+    const data = await response.json();
+    return data.success ? data.professor : null;
+  } catch (error) {
+    console.error('Erro ao validar login:', error);
+    return null;
   }
-  return null;
 };
