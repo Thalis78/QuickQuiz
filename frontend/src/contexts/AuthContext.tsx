@@ -37,8 +37,8 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }, []);
 
   const login = async (email: string, password: string): Promise<{ success: boolean; error?: string }> => {
-    // Validar contra lista de professores pré-cadastrados
-    const professor = validateProfessorLogin(email, password);
+    // Validar contra backend (verifica se email está na lista autorizada)
+    const professor = await validateProfessorLogin(email, password);
     
     if (professor) {
       const userData: User = {
@@ -57,7 +57,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     
     return { 
       success: false, 
-      error: 'Email ou senha incorretos. Apenas professores autorizados da CIEL CURSOS podem acessar.' 
+      error: 'Email ou senha incorretos. Apenas professores autorizados podem acessar.' 
     };
   };
 
