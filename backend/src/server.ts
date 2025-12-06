@@ -9,31 +9,35 @@ import apiRoutes from './apiRoutes';
 const app = express();
 const httpServer = createServer(app);
 
-// Configuração do Socket.IO com CORS
+const localOrigins = ['http://localhost:5173', 'http://127.0.0.1:5173'];
+const configuredFrontend = process.env.FRONTEND_URL
+  ? process.env.FRONTEND_URL.split(',').map((s) => s.trim()).filter(Boolean)
+  : [];
+const allowedOrigins = Array.from(new Set([...localOrigins, ...configuredFrontend]));
+
+const originChecker = (origin: string | undefined, callback: (err: Error | null, allow?: boolean) => void) => {
+  if (!origin) return callback(null, true); 
+  if (allowedOrigins.includes(origin)) return callback(null, true);
+  return callback(new Error('Origin not allowed'), false);
+};
+
 const io = new Server(httpServer, {
   cors: {
-    origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
+    origin: originChecker as any,
     methods: ['GET', 'POST'],
     credentials: true,
   },
 });
 
-// Middleware
-app.use(cors({
-  origin: ['http://localhost:5173', 'http://127.0.0.1:5173'],
-  credentials: true,
-}));
+app.use(cors({ origin: originChecker as any, credentials: true }));
 app.use(express.json());
 
-// Health check
 app.get('/health', (req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// API Routes
 app.use('/api', apiRoutes);
 
-// Setup Socket.IO handlers
 setupSocketHandlers(io);
 
 const PORT = process.env.PORT || 3001;
